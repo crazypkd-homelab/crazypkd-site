@@ -2,44 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>PKD</title>
-  <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <title>crazypkd · homelab</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="PKD — Cloud, AI, and Homelab Experiments" />
+  <meta
+    name="description"
+    content="crazypkd · homelab — exploring cloud systems, automation, and AI through hands-on experimentation."
+  />
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: #000;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+  <!-- Favicon (robust) -->
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="shortcut icon" href="/favicon.png" type="image/png" />
 
-    .container {
-      text-align: center;
-    }
-
-    img {
-      width: 160px;
-      margin-bottom: 24px;
-    }
-
-    p {
-      color: #aaa;
-      letter-spacing: 0.1em;
-      margin: 0;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <div class="container">
-    <img src="logo.png" alt="PKD Logo" />
-    <p>CLOUD · AI · HOMELAB</p>
-  </div>
+
+  <!-- HERO (fixed) -->
+  <header class="hero">
+    <img src="logo.png" alt="PKD logo" class="logo" />
+    <h1>crazypkd · homelab</h1>
+    <p class="tagline">
+      Exploring cloud infrastructure, automation, and AI systems through hands-on experimentation.
+    </p>
+  </header>
+
+  <!-- HORIZONTAL SLIDES -->
+  <main class="panels-wrapper">
+    <button class="nav-arrow nav-arrow-left" aria-label="Previous panel">
+      <span>&lt;</span>
+    </button>
+    
+    <div class="panels">
+      <!-- Vision -->
+      <section class="panel bordered">
+      <h2>Vision</h2>
+      <p>
+        This space exists to explore modern systems — cloud infrastructure,
+        automation, and AI-driven tooling — through curiosity and real-world experimentation.
+      </p>
+      <p>
+        The focus is on understanding how systems work at every layer,
+        how ideas connect, and how complexity emerges through composition.
+      </p>
+    </section>
+
+    <!-- Focus Areas -->
+    <section class="panel bordered">
+      <h2>Focus Areas</h2>
+      <p>
+        This homelab explores four interconnected domains through hands-on experimentation and continuous learning.
+      </p>
+      <div class="systems-grid">
+        <div class="system-item">
+          <strong>Cloud Systems</strong> Infrastructure, networking, deployment, and reliability.
+        </div>
+        <div class="system-item">
+          <strong>Automation</strong> Tooling, workflows, and reducing operational friction.
+        </div>
+        <div class="system-item">
+          <strong>AI Systems</strong> Agents, integrations, and applied AI tooling.
+        </div>
+        <div class="system-item">
+          <strong>Experiments</strong> Labs, prototypes, and exploratory builds.
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning -->
+    <section class="panel bordered">
+      <h2>Learning & Evolution</h2>
+      <p>
+        This homelab is a learning space first.
+        Everything here reflects a journey of exploration — testing ideas,
+        refining understanding, and growing over time.
+      </p>
+      <p>
+        This is only the beginning.
+        The structure, content, and direction of this space will continue to evolve.
+      </p>
+    </section>
+
+    </div>
+    
+    <button class="nav-arrow nav-arrow-right" aria-label="Next panel">
+      <span>&gt;</span>
+    </button>
+  </main>
+
+  <!-- FOOTER (fixed) -->
+  <footer>
+    <a href="https://github.com/crazypkd-homelab" target="_blank" rel="noopener">
+      GitHub
+    </a>
+    <p class="copyright">© 2025 crazypkd. Built as a personal learning project.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
