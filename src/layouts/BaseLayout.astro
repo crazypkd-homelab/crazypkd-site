@@ -1,0 +1,37 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'crazypkd · homelab',
+  description = 'Exploring cloud infrastructure, automation, and AI systems through hands-on experimentation.',
+} = Astro.props;
+
+const pageTitle = title === 'crazypkd · homelab' ? title : `${title} — crazypkd`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <title>{pageTitle}</title>
+  <ClientRouter />
+</head>
+<body class="min-h-screen flex flex-col">
+  <Navbar />
+  <main class="flex-1">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

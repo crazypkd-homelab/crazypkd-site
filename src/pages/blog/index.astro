@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title="Blog" description="Notes, experiments, and learnings from the crazypkd homelab.">
+  <HeroSection
+    title="Blog"
+    subtitle="Documenting the journey — notes on infrastructure, automation, AI, and everything in between."
+  />
+
+  <section class="px-6 py-16 pb-24">
+    <div class="mx-auto max-w-6xl">
+      {posts.length === 0 ? (
+        <div class="text-center py-24">
+          <span class="text-5xl mb-6 block">📝</span>
+          <p class="text-text-primary font-semibold text-lg mb-2">No posts yet</p>
+          <p class="text-text-muted text-sm">The first post is brewing. Check back soon.</p>
+        </div>
+      ) : (
+        <Fragment>
+          <div class="max-w-2xl mb-10">
+            <p class="text-accent text-sm font-semibold tracking-wider uppercase mb-3">All Posts</p>
+            <h2 class="text-3xl font-bold text-text-primary tracking-tight mb-4">Recent Writing</h2>
+            <p class="text-text-muted leading-relaxed">
+              {posts.length} {posts.length === 1 ? 'post' : 'posts'} published so far.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {posts.map((post) => (
+              <BlogPostCard
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.date}
+                slug={post.id}
+                tags={post.data.tags}
+              />
+            ))}
+          </div>
+        </Fragment>
+      )}
+    </div>
+  </section>
+</BaseLayout>

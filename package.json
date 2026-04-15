@@ -1,0 +1,29 @@
+{
+  "name": "crazypkd-site",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "crazypkd homelab — personal site",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crazypkd-homelab/crazypkd-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crazypkd-homelab/crazypkd-site/issues"
+  },
+  "homepage": "https://github.com/crazypkd-homelab/crazypkd-site#readme",
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@lucide/astro": "^1.8.0",
+    "@tailwindcss/vite": "^4.2.2",
+    "astro": "^6.1.6",
+    "tailwindcss": "^4.2.2"
+  }
+}
