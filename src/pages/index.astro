@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import FocusCard from '../components/FocusCard.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const focusAreas = [
+  {
+    title: 'Cloud Systems',
+    description: 'Designing and managing infrastructure across cloud providers — from networking and compute to storage, deployment strategies, and building systems that stay reliable under pressure.',
+    icon: '☁️',
+    accent: 'blue',
+  },
+  {
+    title: 'Automation',
+    description: 'Building pipelines and tooling that remove friction. CI/CD, infrastructure as code, scripting, and turning manual processes into repeatable, dependable workflows.',
+    icon: '⚙️',
+    accent: 'purple',
+  },
+  {
+    title: 'AI Systems',
+    description: 'Exploring applied AI beyond the hype — agent frameworks, LLM integrations, and practical tooling that augments engineering workflows and decision-making.',
+    icon: '🧠',
+    accent: 'emerald',
+  },
+  {
+    title: 'Experiments',
+    description: 'A playground for ideas. Rapid prototypes, lab environments, and exploratory builds — testing hypotheses, breaking things, and learning through hands-on creation.',
+    icon: '🧪',
+    accent: 'amber',
+  },
+];
+---
+
+<BaseLayout>
+  <HeroSection
+    title="crazypkd · homelab"
+    subtitle="A personal lab for exploring cloud infrastructure, automation, and AI systems — learning by building."
+    showCTA={true}
+    showLogo={true}
+    badge="Open source · Always evolving"
+  />
+
+  <!-- Focus Areas -->
+  <section class="px-6 py-16">
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-2xl mb-10">
+        <p class="text-accent text-sm font-semibold tracking-wider uppercase mb-3">What I Work On</p>
+        <h2 class="text-3xl font-bold text-text-primary tracking-tight mb-4">Focus Areas</h2>
+        <p class="text-text-muted leading-relaxed">
+          Four interconnected domains explored through hands-on building and continuous iteration.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {focusAreas.map((area) => (
+          <FocusCard title={area.title} description={area.description} icon={area.icon} accent={area.accent} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CrazyHub Featured -->
+  <section class="px-6 py-16">
+    <div class="mx-auto max-w-6xl">
+      <div class="relative rounded-3xl overflow-hidden border border-accent/15">
+        <div class="absolute inset-0 bg-gradient-to-br from-accent/8 via-accent/3 to-purple-500/5" aria-hidden="true"></div>
+
+        <div class="relative p-8 md:p-12">
+          <!-- Header -->
+          <div class="flex flex-wrap items-center gap-3 mb-5">
+            <span class="text-3xl">🚀</span>
+            <h3 class="text-text-primary font-bold text-2xl md:text-3xl">CrazyHub</h3>
+            <span class="px-3 py-1 rounded-full bg-accent/15 text-accent text-[11px] font-semibold uppercase tracking-wider">Featured Project</span>
+          </div>
+
+          <p class="text-text-secondary text-sm sm:text-base leading-relaxed max-w-2xl mb-8">
+            Self-hosted cloud resource monitoring dashboard with a plug-and-play provider architecture.
+            Aggregate and monitor resources across AWS, Azure, GCP, and Cloudflare from a single unified dashboard — deployed as a single Docker container with zero external dependencies.
+          </p>
+
+          <!-- Key features -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div class="flex items-start gap-3">
+              <span class="text-accent mt-0.5">☁️</span>
+              <div>
+                <p class="text-text-primary text-sm font-medium">Multi-Cloud</p>
+                <p class="text-text-muted text-xs">AWS, Azure, GCP, Cloudflare in one view</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-accent mt-0.5">🔐</span>
+              <div>
+                <p class="text-text-primary text-sm font-medium">Encrypted Storage</p>
+                <p class="text-text-muted text-xs">AES-256-GCM credential encryption at rest</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-accent mt-0.5">🐳</span>
+              <div>
+                <p class="text-text-primary text-sm font-medium">Single Container</p>
+                <p class="text-text-muted text-xs">One docker run, SQLite embedded, no external DB</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tech stack -->
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.08] text-text-muted text-xs">Next.js 16</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.08] text-text-muted text-xs">Prisma + SQLite</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.08] text-text-muted text-xs">Docker</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.08] text-text-muted text-xs">AWS SDK</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Posts -->
+  {recentPosts.length > 0 && (
+    <section class="px-6 py-16 pb-24">
+      <div class="mx-auto max-w-6xl">
+        <div class="flex items-end justify-between mb-10">
+          <div>
+            <p class="text-accent text-sm font-semibold tracking-wider uppercase mb-3">From the Blog</p>
+            <h2 class="text-3xl font-bold text-text-primary tracking-tight">Latest Posts</h2>
+          </div>
+          <a href="/blog" class="text-sm text-text-muted hover:text-accent transition-colors flex items-center gap-1">
+            View all
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {recentPosts.map((post) => (
+            <BlogPostCard
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.date}
+              slug={post.id}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>

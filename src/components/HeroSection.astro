@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../assets/logo.png';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  showCTA?: boolean;
+  showLogo?: boolean;
+  badge?: string;
+}
+
+const { title, subtitle, showCTA = false, showLogo = false, badge } = Astro.props;
+---
+
+<section class="relative pt-32 pb-20 sm:pt-40 sm:pb-24 px-6 overflow-hidden">
+  <!-- Multi-layered background glow -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/[0.04] rounded-full blur-[150px]"></div>
+    <div class="absolute bottom-0 left-1/4 w-[400px] h-[200px] bg-purple-500/[0.03] rounded-full blur-[100px]"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-3xl text-center">
+    {showLogo && (
+      <div class="mb-8 inline-block">
+        <Image
+          src={logoImg}
+          alt="crazypkd logo"
+          width={72}
+          height={72}
+          class="rounded-2xl ring-1 ring-white/10 shadow-2xl shadow-black/50"
+        />
+      </div>
+    )}
+
+    {badge && (
+      <div class="mb-6">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-text-muted text-xs font-medium tracking-wide">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          {badge}
+        </span>
+      </div>
+    )}
+
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-text-primary tracking-tight leading-[1.1]">
+      {title}
+    </h1>
+
+    {subtitle && (
+      <p class="mt-6 text-base sm:text-lg text-text-muted leading-relaxed max-w-xl mx-auto">
+        {subtitle}
+      </p>
+    )}
+
+    {showCTA && (
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-text-primary text-bg font-semibold text-sm hover:bg-white/90 transition-all shadow-lg shadow-white/5"
+        >
+          Explore Projects
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border hover:border-border-hover hover:bg-white/5 text-text-secondary font-medium text-sm transition-all"
+        >
+          Read the Blog
+        </a>
+      </div>
+    )}
+  </div>
+</section>

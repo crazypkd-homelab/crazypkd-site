@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="pt-32 pb-24 px-6">
+    <div class="mx-auto max-w-3xl">
+      <!-- Header -->
+      <header class="mb-12">
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-1 text-text-muted hover:text-text-secondary text-sm transition-colors mb-8"
+        >
+          &larr; Back to Blog
+        </a>
+        <h1 class="text-3xl sm:text-4xl font-bold text-text-primary tracking-tight leading-tight">
+          {post.data.title}
+        </h1>
+        <div class="flex items-center gap-4 mt-4">
+          <time class="text-text-muted text-sm">{formattedDate}</time>
+          {post.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+              {post.data.tags.map((tag: string) => (
+                <span class="px-2.5 py-1 rounded-md bg-white/5 text-text-muted text-xs font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="prose prose-invert prose-sm sm:prose-base max-w-none
+        prose-headings:text-text-primary prose-headings:font-semibold prose-headings:tracking-tight
+        prose-p:text-text-secondary prose-p:leading-relaxed
+        prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+        prose-strong:text-text-primary
+        prose-li:text-text-secondary
+        prose-code:text-accent prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+        prose-pre:bg-white/5 prose-pre:border prose-pre:border-border prose-pre:rounded-xl
+        prose-blockquote:border-accent/30 prose-blockquote:text-text-muted
+        prose-hr:border-border">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

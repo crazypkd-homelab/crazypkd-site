@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  accent?: string;
+}
+
+const { title, description, icon, accent = 'accent' } = Astro.props;
+
+const accentMap: Record<string, string> = {
+  blue: 'from-blue-500/10 to-transparent border-l-blue-500/40',
+  purple: 'from-purple-500/10 to-transparent border-l-purple-500/40',
+  emerald: 'from-emerald-500/10 to-transparent border-l-emerald-500/40',
+  amber: 'from-amber-500/10 to-transparent border-l-amber-500/40',
+  accent: 'from-accent/10 to-transparent border-l-accent/40',
+};
+
+const accentClass = accentMap[accent] || accentMap.accent;
+---
+
+<div class:list={[
+  'group relative rounded-2xl border border-border border-l-2 bg-gradient-to-br p-6 md:p-7',
+  'hover:scale-[1.02] hover:shadow-lg hover:shadow-white/[0.02] transition-all duration-300',
+  accentClass,
+]}>
+  <span class="text-2xl mb-4 block" role="img">{icon}</span>
+  <h3 class="text-text-primary font-semibold text-base mb-3">{title}</h3>
+  <p class="text-text-muted text-sm leading-relaxed">{description}</p>
+</div>
