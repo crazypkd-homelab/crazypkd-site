@@ -5,7 +5,7 @@ interface Props {
   href?: string;
   tags?: string[];
   featured?: boolean;
-  status?: 'live' | 'building' | 'planned';
+  status?: 'live' | 'building' | 'planned' | 'local' | 'evolving';
   icon?: string;
 }
 
@@ -15,6 +15,8 @@ const statusConfig: Record<string, { label: string; class: string }> = {
   live: { label: 'Live', class: 'bg-emerald-500/15 text-emerald-400' },
   building: { label: 'In Progress', class: 'bg-amber-500/15 text-amber-400' },
   planned: { label: 'Planned', class: 'bg-white/8 text-text-muted' },
+  local: { label: 'Local Only', class: 'bg-sky-500/15 text-sky-400' },
+  evolving: { label: 'Evolving', class: 'bg-violet-500/15 text-violet-400' },
 };
 
 const { label: statusLabel, class: statusClass } = statusConfig[status];
